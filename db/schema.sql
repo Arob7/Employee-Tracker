@@ -13,8 +13,8 @@ CREATE TABLE department (
     PRIMARY KEY(id)
 );
 
--- create table for role
-CREATE TABLE role (
+-- create table for role --- does not pull tables in MYSQL
+CREATE TABLE roles (
     id int AUTO_INCREMENT NOT NULL,
     title VARCHAR(30)NOT NULL,
     salary DECIMAL (10,2),
@@ -27,10 +27,21 @@ CREATE TABLE employee (
     id int NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30)NOT NULL,
     last_name VARCHAR(30)NOT NULL,
-    role_id INT references role(id),
+    FOREIGN KEY (role_id) references roles(id),
     manager_id int (10)NULL,
+    FOREIGN KEY (manager_id) references employee(manager_id),
     PRIMARY KEY(id)
 );
 SELECT * FROM department;
-SELECT * FROM role;
+SELECT * FROM roles;
 SELECT * FROM employee;
+
+SELECT id
+FROM department 
+INNER JOIN roles
+ON department.id = department_id;
+
+SELECT id
+FROM roles
+INNER JOIN employee
+ON roles.id = role_id;
