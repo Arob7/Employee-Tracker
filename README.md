@@ -1,20 +1,21 @@
 # Employee-Tracker
 Developers are often tasked with creating interfaces that make it easy for non-developers to view and interact with information stored in databases. Often these interfaces are known as Content Management Systems. In this app, the purpose is to architect and build a solution for managing a company's employees using node, inquirer, and MySQL.
-## database schema
 
-* **department**:
+## Database Schema
+
+* **Department**:
 
   * **id** - INT PRIMARY KEY
   * **name** - VARCHAR(30) to hold department name
 
-* **role**:
+* **Role**:
 
   * **id** - INT PRIMARY KEY
   * **title** -  VARCHAR(30) to hold role title
   * **salary** -  DECIMAL to hold role salary
   * **department_id** -  INT to hold reference to department role belongs to
 
-* **employee**:
+* **Employee**:
 
   * **id** - INT PRIMARY KEY
   * **first_name** - VARCHAR(30) to hold employee first name
