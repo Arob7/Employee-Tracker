@@ -15,6 +15,7 @@ connection.connect(function (err) {
   start();
 });
 
+// STARTS CHOICE PROMPT
 function start() {
   inquirer
     .prompt({
@@ -34,7 +35,6 @@ function start() {
       name: "choice",
     })
     .then((answers) => {
-      console.log(answers.choice);
       switch (answers.choice) {
         case "View all employees":
           viewEmployees();
@@ -96,4 +96,63 @@ function viewRoles() {
       start();
     }
   );
+}
+
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "department",
+        message: "What department do you want to add?",
+      },
+    ])
+    .then(function (res) {
+      connection.query(
+        "INSERT INTO department (name) VALUES (?)",
+        [res.department],
+        function (err, data) {
+          if (err) throw err;
+          console.table("Successfully Added Dept!");
+          start();
+        }
+      );
+    });
+}
+
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "What is the employee's first name?",
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "What is the employee's last name?",
+      },
+      {
+        type: "number",
+        name: "roleId",
+        message: "What is the employee's role ID",
+      },
+      {
+        type: "number",
+        name: "managerId",
+        message: "What is the employee's manager's ID?",
+      },
+    ])
+    .then(function (res) {
+      connection.query(
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [res.firstName, res.lastName, res.roleId, res.managerId],
+        function (err, data) {
+          if (err) throw err;
+          console.table("Successfully Added Employee!");
+          start();
+        }
+      );
+    });
 }
