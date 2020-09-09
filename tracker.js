@@ -79,13 +79,10 @@ function viewDepartments() {
 }
 
 function viewEmployees() {
-  connection.query(
-    "SELECT roles.title, roles.salary, employee.first_name, employee.last_name FROM roles INNER JOIN employee ON (employee.role_id = role_id)",
-    function (err, data) {
-      console.table(data);
-      start();
-    }
-  );
+  connection.query("SELECT * FROM employee", function (err, data) {
+    console.table(data);
+    start();
+  });
 }
 
 function viewRoles() {
