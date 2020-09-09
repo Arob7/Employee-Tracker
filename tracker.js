@@ -113,7 +113,7 @@ function addDepartment() {
         [res.department],
         function (err, data) {
           if (err) throw err;
-          console.table("Successfully Added Dept!");
+          console.table(data);
           start();
         }
       );
@@ -150,9 +150,64 @@ function addEmployee() {
         [res.firstName, res.lastName, res.roleId, res.managerId],
         function (err, data) {
           if (err) throw err;
-          console.table("Successfully Added Employee!");
+          console.table(data);
           start();
         }
       );
+    });
+}
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Title of role:",
+      },
+      {
+        type: "number",
+        name: "salary",
+        message: "Enter salary:",
+      },
+      {
+        type: "number",
+        name: "department_id",
+        message: "Enter department ID:",
+      },
+    ])
+    .then(function (res) {
+      connection.query(
+        "INSERT INTO roles (title, salary, department_id) values (?, ?, ?)",
+        [res.title, res.salary, res.department_id],
+        function (err, data) {
+          console.table(data);
+        }
+      );
+      start();
+    });
+}
+function updateEmployeeRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Which employee would you like to update? (first name only)",
+      },
+      {
+        type: "number",
+        name: "role_id",
+        message: "Enter new role ID:",
+      },
+    ])
+    .then(function (res) {
+      connection.query(
+        "UPDATE employee SET role_id = ? WHERE first_name = ?",
+        [res.role_id, res.name],
+        function (err, data) {
+          console.table(data);
+        }
+      );
+      start();
     });
 }
