@@ -1,6 +1,8 @@
 # Employee-Tracker
 Developers are often tasked with creating interfaces that make it easy for non-developers to view and interact with information stored in databases. Often these interfaces are known as Content Management Systems. In this app, the purpose is to architect and build a solution for managing a company's employees using node, inquirer, and MySQL.
 
+Video : <iframe src="https://drive.google.com/file/d/103GU-4g0rUy03K_iW33LwtSVcnKg1fvc/preview" width="640" height="480"></iframe>
+
 ## Database Schema
 
 * **Department**:
